@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Recycle 4 Life Global — Junk Removal & Recycling Made Simple</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --beige: #F5F0E8;
+    --beige-dark: #EDE6D6;
+    --orange: #F4622A;
+    --orange-hover: #D94E1F;
+    --green: #2E7D32;
+    --green-light: #4CAF50;
+    --black: #111111;
+    --black-soft: #1E1E1E;
+    --gray: #6B6B6B;
+    --white: #FFFFFF;
+    --card-bg: #FFFDF8;
+    --border: rgba(0,0,0,0.08);
+    --shadow: 0 4px 24px rgba(0,0,0,0.07);
+    --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--beige); color: var(--black); overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: rgba(245,240,232,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 72px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { width: 38px; height: 38px; background: var(--orange); border-radius: 10px; display:flex; align-items:center; justify-content:center; }
+  .nav-logo-icon svg { width:22px; height:22px; fill:white; }
+  .nav-brand { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:800; color:var(--black); line-height:1.1; }
+  .nav-brand span { color:var(--orange); }
+  .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+  .nav-links a { text-decoration:none; color:var(--black); font-size:0.9rem; font-weight:500; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--orange); }
+  .nav-cta {
+    background:var(--orange); color:white; padding:10px 22px; border-radius:8px;
+    font-weight:600; font-size:0.9rem; text-decoration:none; transition:background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background:var(--orange-hover); transform:translateY(-1px); }
+
+  /* ── SECTION LABEL ── */
+  .label { display:inline-flex; align-items:center; gap:6px; background:rgba(46,125,50,0.1); color:var(--green); font-size:0.78rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:5px 12px; border-radius:50px; margin-bottom:16px; }
+  .label::before { content:''; width:6px; height:6px; background:var(--green); border-radius:50%; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh; padding: 140px 5% 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-shape {
+    position:absolute; right:-120px; top:50%; transform:translateY(-50%);
+    width:520px; height:520px; background:radial-gradient(circle, rgba(244,98,42,0.12) 0%, transparent 70%);
+    border-radius:50%; pointer-events:none;
+  }
+  .hero-tag { display:inline-flex; align-items:center; gap:8px; background:var(--black); color:white; font-size:0.78rem; font-weight:600; padding:6px 14px; border-radius:50px; margin-bottom:20px; }
+  .hero-tag span { background:var(--orange); color:white; padding:2px 8px; border-radius:20px; font-size:0.72rem; }
+  .hero-h1 { font-size: clamp(2.6rem, 4.5vw, 4rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em; margin-bottom:22px; }
+  .hero-h1 em { font-style:normal; color:var(--orange); }
+  .hero-sub { font-size:1.05rem; color:var(--gray); line-height:1.7; max-width:480px; margin-bottom:36px; }
+  .hero-actions { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:48px; }
+  .btn-primary {
+    background:var(--orange); color:white; padding:14px 28px; border-radius:10px;
+    font-weight:700; font-size:1rem; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:background 0.2s, transform 0.15s; box-shadow:0 4px 20px rgba(244,98,42,0.35);
+  }
+  .btn-primary:hover { background:var(--orange-hover); transform:translateY(-2px); }
+  .btn-secondary {
+    background:transparent; color:var(--black); padding:14px 28px; border-radius:10px;
+    font-weight:600; font-size:1rem; text-decoration:none; border:1.5px solid var(--border);
+    transition:border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color:var(--black); background:rgba(0,0,0,0.03); }
+  .hero-trust { display:flex; align-items:center; gap:20px; }
+  .trust-item { display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--gray); }
+  .trust-icon { font-size:1rem; }
+  .hero-booking-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:20px;
+    padding:32px; box-shadow:var(--shadow-lg); position:relative; z-index:2;
+  }
+  .booking-title { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; margin-bottom:6px; }
+  .booking-sub { font-size:0.85rem; color:var(--gray); margin-bottom:24px; }
+  .service-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+  .svc-btn {
+    background:var(--beige); border:1.5px solid var(--border); border-radius:10px;
+    padding:14px 12px; cursor:pointer; transition:all 0.2s; text-align:center;
+    font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; color:var(--black);
+  }
+  .svc-btn:hover, .svc-btn.active { background:var(--orange); color:white; border-color:var(--orange); }
+  .svc-btn-icon { font-size:1.4rem; display:block; margin-bottom:5px; }
+  .booking-input {
+    width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:10px;
+    font-family:'DM Sans',sans-serif; font-size:0.9rem; background:var(--beige); margin-bottom:12px; outline:none;
+    transition:border-color 0.2s;
+  }
+  .booking-input:focus { border-color:var(--orange); }
+  .btn-book {
+    width:100%; background:var(--orange); color:white; padding:14px; border-radius:10px;
+    font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; border:none; cursor:pointer;
+    transition:background 0.2s, transform 0.15s; box-shadow:0 4px 20px rgba(244,98,42,0.3);
+  }
+  .btn-book:hover { background:var(--orange-hover); transform:translateY(-1px); }
+  .booking-note { font-size:0.75rem; color:var(--gray); text-align:center; margin-top:10px; }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background:var(--black); padding:28px 5%;
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    gap:20px; text-align:center;
+  }
+  .stat-num { font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; color:var(--orange); }
+  .stat-label { font-size:0.8rem; color:rgba(255,255,255,0.6); margin-top:3px; }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding:96px 5%; }
+  .section-header { text-align:center; margin-bottom:60px; }
+  .section-header h2 { font-size:clamp(2rem, 3vw, 2.8rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:14px; }
+  .section-header p { font-size:1rem; color:var(--gray); max-width:520px; margin:0 auto; line-height:1.7; }
+
+  /* ── SERVICES ── */
+  #services { background:var(--beige-dark); }
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px; }
+  .service-card {
+    background:var(--card-bg); border:1px solid var(--border); border-radius:18px;
+    padding:32px 28px; transition:transform 0.25s, box-shadow 0.25s; cursor:pointer;
+    position:relative; overflow:hidden;
+  }
+  .service-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+    background:var(--orange); transform:scaleX(0); transition:transform 0.25s;
+  }
+  .service-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+  .service-card:hover::after { transform:scaleX(1); }
+  .svc-icon-wrap {
+    width:56px; height:56px; background:rgba(244,98,42,0.1); border-radius:14px;
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem; margin-bottom:20px;
+  }
+  .service-card h3 { font-size:1.2rem; font-weight:800; margin-bottom:10px; }
+  .service-card p { font-size:0.88rem; color:var(--gray); line-height:1.7; margin-bottom:18px; }
+  .svc-link { font-size:0.85rem; font-weight:600; color:var(--orange); text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
+  .svc-link:hover { gap:8px; }
+
+  /* ── HOW IT WORKS ── */
+  #how-it-works { background:var(--beige); }
+  .steps-container { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:32px; position:relative; }
+  .steps-container::before {
+    content:''; position:absolute; top:36px; left:10%; right:10%; height:2px;
+    background:linear-gradient(90deg, transparent, var(--orange), transparent);
+    opacity:0.3;
+  }
+  .step { text-align:center; position:relative; z-index:1; }
+  .step-num {
+    width:72px; height:72px; border-radius:50%; background:var(--orange);
+    color:white; font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 20px;
+    box-shadow:0 6px 24px rgba(244,98,42,0.35);
+  }
+  .step h3 { font-size:1.05rem; font-weight:800; margin-bottom:8px; }
+  .step p { font-size:0.85rem; color:var(--gray); line-height:1.65; }
+
+  /* ── PRICING ── */
+  #pricing { background:var(--black-soft); }
+  #pricing .section-header h2 { color:white; }
+  #pricing .section-header p { color:rgba(255,255,255,0.5); }
+  .pricing-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:16px; margin-bottom:48px; }
+  .price-card {
+    background:#2A2A2A; border:1px solid rgba(255,255,255,0.06); border-radius:14px;
+    padding:22px 18px; text-align:center; transition:transform 0.2s, background 0.2s;
+    cursor:pointer;
+  }
+  .price-card:hover { transform:translateY(-4px); background:#333; }
+  .price-card-icon { font-size:2rem; margin-bottom:12px; }
+  .price-card-name { font-size:0.88rem; color:rgba(255,255,255,0.7); margin-bottom:8px; font-weight:500; }
+  .price-card-price { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:var(--orange); }
+  .price-note { text-align:center; font-size:0.8rem; color:rgba(255,255,255,0.3); margin-top:-32px; margin-bottom:40px; }
+  .pricing-cta { text-align:center; }
+  .pricing-guarantee {
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(46,125,50,0.15); border:1px solid rgba(46,125,50,0.3);
+    color:#81C784; padding:12px 22px; border-radius:50px; font-size:0.85rem; font-weight:500;
+    margin-bottom:24px;
+  }
+
+  /* ── MISSION ── */
+  #mission {
+    background:var(--beige); display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+    padding:96px 5%;
+  }
+  .mission-visual {
+    position:relative; background:var(--black); border-radius:24px; overflow:hidden;
+    min-height:420px; display:flex; align-items:flex-end; padding:36px;
+  }
+  .mission-bg-pattern {
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg, rgba(244,98,42,0.05) 0px, rgba(244,98,42,0.05) 1px, transparent 1px, transparent 40px);
+  }
+  .mission-quote {
+    position:relative; z-index:1; border-left:4px solid var(--orange); padding-left:20px;
+  }
+  .mission-quote blockquote { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:700; color:white; line-height:1.4; margin-bottom:16px; }
+  .mission-quote cite { font-size:0.85rem; color:rgba(255,255,255,0.5); font-style:normal; }
+  .mission-content .label { margin-bottom:16px; }
+  .mission-content h2 { font-size:clamp(1.8rem,3vw,2.6rem); font-weight:800; line-height:1.2; margin-bottom:20px; }
+  .mission-content p { font-size:0.95rem; color:var(--gray); line-height:1.8; margin-bottom:16px; }
+  .triple-r { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+  .r-pill {
+    background:var(--beige-dark); border:1px solid var(--border); border-radius:50px;
+    padding:8px 18px; font-weight:700; font-size:0.85rem; display:flex; align-items:center; gap:6px;
+  }
+  .r-pill span { color:var(--orange); }
+
+  /* ── DONATION ── */
+  #donation {
+    background:var(--green); padding:72px 5%; text-align:center;
+  }
+  #donation h2 { font-size:clamp(1.8rem,3vw,2.6rem); color:white; font-weight:800; margin-bottom:16px; }
+  #donation p { color:rgba(255,255,255,0.8); font-size:1rem; max-width:540px; margin:0 auto 32px; line-height:1.7; }
+  .btn-white {
+    background:white; color:var(--green); padding:14px 32px; border-radius:10px;
+    font-weight:700; font-size:1rem; text-decoration:none; display:inline-block;
+    transition:transform 0.15s, box-shadow 0.2s; box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-white:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,0,0,0.2); }
+
+  /* ── CONTACT ── */
+  #contact { background:var(--beige-dark); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:64px; align-items:start; }
+  .contact-info h2 { font-size:2rem; font-weight:800; margin-bottom:14px; }
+  .contact-info p { color:var(--gray); line-height:1.7; margin-bottom:32px; }
+  .contact-detail { display:flex; align-items:center; gap:12px; margin-bottom:16px; font-size:0.9rem; }
+  .cd-icon { width:40px; height:40px; background:var(--orange); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+  .contact-form-card { background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:36px; box-shadow:var(--shadow); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .form-group { margin-bottom:14px; }
+  label { display:block; font-size:0.82rem; font-weight:600; margin-bottom:6px; color:var(--black); }
+  input, select, textarea {
+    width:100%; padding:12px 14px; border:1.5px solid var(--border); border-radius:10px;
+    font-family:'DM Sans',sans-serif; font-size:0.9rem; background:var(--beige); outline:none;
+    transition:border-color 0.2s; color:var(--black);
+  }
+  input:focus, select:focus, textarea:focus { border-color:var(--orange); }
+  textarea { min-height:100px; resize:vertical; }
+
+  /* ── SITEMAP ── */
+  #sitemap { background:var(--beige); }
+  .sitemap-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; }
+  .sitemap-col { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:24px; }
+  .sitemap-col h4 { font-size:0.95rem; font-weight:800; margin-bottom:14px; padding-bottom:10px; border-bottom:2px solid var(--orange); }
+  .sitemap-col ul { list-style:none; }
+  .sitemap-col li { font-size:0.82rem; color:var(--gray); padding:4px 0; display:flex; align-items:center; gap:6px; }
+  .sitemap-col li::before { content:'→'; color:var(--orange); font-size:0.7rem; }
+
+  /* ── FOOTER ── */
+  footer { background:var(--black); padding:60px 5% 30px; }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; margin-bottom:48px; }
+  .footer-brand p { font-size:0.85rem; color:rgba(255,255,255,0.45); line-height:1.7; margin-top:14px; max-width:280px; }
+  .footer-col h4 { font-size:0.85rem; font-weight:700; color:white; margin-bottom:14px; text-transform:uppercase; letter-spacing:0.06em; }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:8px; }
+  .footer-col a { color:rgba(255,255,255,0.45); font-size:0.85rem; text-decoration:none; transition:color 0.2s; }
+  .footer-col a:hover { color:var(--orange); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,0.07); padding-top:24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .footer-bottom p { font-size:0.8rem; color:rgba(255,255,255,0.3); }
+  .eco-badge { background:rgba(46,125,50,0.2); color:#81C784; font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:20px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .hero-content > * { animation:fadeUp 0.6s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay:0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay:0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay:0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay:0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay:0.5s; }
+  .hero-booking-card { animation:fadeUp 0.7s 0.3s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px) {
+    #home { grid-template-columns:1fr; }
+    .hero-bg-shape { display:none; }
+    .stats-bar { grid-template-columns:repeat(2,1fr); }
+    #mission { grid-template-columns:1fr; }
+    .contact-grid { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:600px) {
+    nav { padding:0 4%; }
+    .nav-links { display:none; }
+    section { padding:64px 4%; }
+    .form-row { grid-template-columns:1fr; }
+    .footer-grid { grid-template-columns:1fr; }
+  }
+
+  /* ── YOUTUBE ── */
+  #watch { background: var(--black-soft); padding: 96px 5%; }
+  #watch .section-header h2 { color: white; }
+  #watch .section-header p { color: rgba(255,255,255,0.5); }
+  .yt-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: center; }
+  .yt-embed-wrap {
+    position: relative; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    aspect-ratio: 16/9;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .yt-embed-wrap iframe { width:100%; height:100%; display:block; border:none; }
+  .yt-badge {
+    position:absolute; top:16px; left:16px; background:#FF0000;
+    color:white; font-size:0.72rem; font-weight:700; padding:4px 10px;
+    border-radius:4px; display:flex; align-items:center; gap:5px; z-index:2;
+  }
+  .yt-info h3 { font-family:'Syne',sans-serif; font-size:1.7rem; font-weight:800; color:white; line-height:1.25; margin-bottom:16px; }
+  .yt-info h3 em { font-style:normal; color:var(--orange); }
+  .yt-info p { font-size:0.92rem; color:rgba(255,255,255,0.55); line-height:1.75; margin-bottom:24px; }
+  .yt-highlights { list-style:none; margin-bottom:32px; }
+  .yt-highlights li {
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:0.88rem; color:rgba(255,255,255,0.7); margin-bottom:12px; line-height:1.5;
+  }
+  .yt-highlights li::before { content:'▶'; color:var(--orange); font-size:0.6rem; margin-top:4px; flex-shrink:0; }
+  .yt-sub-link {
+    display:inline-flex; align-items:center; gap:8px;
+    background:#FF0000; color:white; padding:12px 22px; border-radius:8px;
+    font-weight:700; font-size:0.9rem; text-decoration:none;
+    transition:background 0.2s, transform 0.15s;
+  }
+  .yt-sub-link:hover { background:#CC0000; transform:translateY(-2px); }
+  @media(max-width:900px) {
+    .yt-layout { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 8.5l-1.5-3h-15L3 8.5M12 3v5.5M7.5 21l1-8h7l1 8M3 8.5h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/></svg>
+    </div>
+    <div class="nav-brand">Recycle 4 Life<br/><span>Global</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#mission">Our Mission</a></li>
+    <li><a href="#watch">▶ Watch</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Your Price →</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-tag">🌿 Chicago's #1 Eco-Removal Service <span>NEW</span></div>
+    <h1 class="hero-h1">Junk Removal &<br/>Recycling Made<br/><em>Simple.</em></h1>
+    <p class="hero-sub">Upfront pricing. Same-day service. Zero landfill guilt. We repurpose, recycle, and responsibly dispose of everything — so you don't have to worry.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">📦 Get Your Price →</a>
+      <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-icon">✅</span> Transparent Pricing</div>
+      <div class="trust-item"><span class="trust-icon">♻️</span> 70%+ Diverted from Landfill</div>
+      <div class="trust-item"><span class="trust-icon">⚡</span> Same-Day Available</div>
+    </div>
+  </div>
+
+  <div class="hero-booking-card">
+    <div class="booking-title">What do you need removed?</div>
+    <div class="booking-sub">Select a service to get an instant estimate</div>
+    <div class="service-grid">
+      <button class="svc-btn active" onclick="selectSvc(this)"><span class="svc-btn-icon">🛋️</span>Junk Removal</button>
+      <button class="svc-btn" onclick="selectSvc(this)"><span class="svc-btn-icon">🚗</span>Tire Recycling</button>
+      <button class="svc-btn" onclick="selectSvc(this)"><span class="svc-btn-icon">🧴</span>Plastic Recycle</button>
+      <button class="svc-btn" onclick="selectSvc(this)"><span class="svc-btn-icon">♻️</span>Recycle & Dispose</button>
+    </div>
+    <input class="booking-input" type="text" placeholder="📍 Enter your zip code"/>
+    <input class="booking-input" type="text" placeholder="📅 Preferred date (optional)"/>
+    <button class="btn-book" onclick="alert('Booking flow coming soon! We\'ll contact you within 30 minutes.')">Get My Free Estimate →</button>
+    <p class="booking-note">🔒 No credit card required. No surprise fees. Ever.</p>
+  </div>
+  <div class="hero-bg-shape"></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div><div class="stat-num">5,000+</div><div class="stat-label">Tons Diverted from Landfill</div></div>
+  <div><div class="stat-num">98%</div><div class="stat-label">Customer Satisfaction</div></div>
+  <div><div class="stat-num">Same Day</div><div class="stat-label">Service Available</div></div>
+  <div><div class="stat-num">$0</div><div class="stat-label">Hidden Fees. Ever.</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="label">Our Services</div>
+    <h2>Four Pillars of Responsible Removal</h2>
+    <p>Every item we pick up gets a second chance. Here's how we handle your specific needs.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-icon-wrap">🚗</div>
+      <h3>Tire Recycling</h3>
+      <p>Responsible disposal and repurposing of bulk tires. We partner with certified processors to ensure every tire is properly shredded, retreaded, or converted to fuel — never dumped.</p>
+      <a href="#pricing" class="svc-link">View Pricing →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon-wrap">🛋️</div>
+      <h3>Junk Removal</h3>
+      <p>Full-service hauling for homes and businesses. From single items to full cleanouts — we do the heavy lifting, sorting, and responsible disposal so you can reclaim your space.</p>
+      <a href="#pricing" class="svc-link">View Pricing →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon-wrap">🧴</div>
+      <h3>Plastic Recycle</h3>
+      <p>Commercial and residential plastic waste solutions. We handle sorting, baling, and routing plastics to the right processing facilities — far beyond curbside capabilities.</p>
+      <a href="#pricing" class="svc-link">View Pricing →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon-wrap">♻️</div>
+      <h3>Recycle & Dispose</h3>
+      <p>General eco-friendly waste management for items that don't fit in a single category. Mixed loads, estate cleanouts, and construction debris handled with full accountability.</p>
+      <a href="#pricing" class="svc-link">View Pricing →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-header">
+    <div class="label">Process</div>
+    <h2>Booked in 60 Seconds. Gone the Same Day.</h2>
+    <p>We've eliminated the stress of traditional junk removal — no waiting for estimates, no surprise bills.</p>
+  </div>
+  <div class="steps-container">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Choose Your Service</h3>
+      <p>Select what you need removed from our simple menu. Tires, junk, plastics, or a full cleanout.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Get Upfront Pricing</h3>
+      <p>See guaranteed pricing instantly — no on-site estimate required. What you see is what you pay.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Pick Your Time</h3>
+      <p>Choose a window that works for you. Same-day and next-day slots available across Chicagoland.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>We Arrive & Haul</h3>
+      <p>Our team shows up on time, does all the heavy lifting, and leaves your space spotless.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <h3>We Repurpose First</h3>
+      <p>Usable items go to community donation partners. The rest is recycled. Landfill is our last resort.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header">
+    <div class="label" style="background:rgba(244,98,42,0.15); color:var(--orange);">Transparent Pricing</div>
+    <h2>Know the Cost Before We Arrive</h2>
+    <p style="color:rgba(255,255,255,0.5);">No on-site estimates. No hourly surprises. Guaranteed upfront pricing on every item.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card"><div class="price-card-icon">🛋️</div><div class="price-card-name">Sofa / Couch</div><div class="price-card-price">From $89</div></div>
+    <div class="price-card"><div class="price-card-icon">🛏️</div><div class="price-card-name">Mattress</div><div class="price-card-price">From $69</div></div>
+    <div class="price-card"><div class="price-card-icon">🧊</div><div class="price-card-name">Refrigerator</div><div class="price-card-price">From $99</div></div>
+    <div class="price-card"><div class="price-card-icon">🖥️</div><div class="price-card-name">TV / Electronics</div><div class="price-card-price">From $49</div></div>
+    <div class="price-card"><div class="price-card-icon">🚗</div><div class="price-card-name">Single Tire</div><div class="price-card-price">From $15</div></div>
+    <div class="price-card"><div class="price-card-icon">🛞</div><div class="price-card-name">Pile of Tires (10+)</div><div class="price-card-price">From $99</div></div>
+    <div class="price-card"><div class="price-card-icon">🏠</div><div class="price-card-name">Room Cleanout</div><div class="price-card-price">From $199</div></div>
+    <div class="price-card"><div class="price-card-icon">🏭</div><div class="price-card-name">Full Home Cleanout</div><div class="price-card-price">From $499</div></div>
+    <div class="price-card"><div class="price-card-icon">🧴</div><div class="price-card-name">Plastic Bulk (50 lbs)</div><div class="price-card-price">From $59</div></div>
+    <div class="price-card"><div class="price-card-icon">🗄️</div><div class="price-card-name">Office Furniture</div><div class="price-card-price">From $79</div></div>
+    <div class="price-card"><div class="price-card-icon">🌿</div><div class="price-card-name">Yard Waste</div><div class="price-card-price">From $79</div></div>
+    <div class="price-card"><div class="price-card-icon">📦</div><div class="price-card-name">Mixed Load (1/4 Truck)</div><div class="price-card-price">From $149</div></div>
+  </div>
+  <p class="price-note">* Starting prices. Final quote locked in before we arrive — never adjusted on-site.</p>
+  <div class="pricing-cta">
+    <div class="pricing-guarantee">✅ Price Guarantee: We quote it. We honor it. Period.</div><br/>
+    <a href="#contact" class="btn-primary">📋 Get My Custom Quote →</a>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section id="mission" style="padding:96px 5%;">
+  <div class="mission-visual">
+    <div class="mission-bg-pattern"></div>
+    <div class="mission-quote">
+      <blockquote>"We don't just dump — we Repurpose, Recycle, and Reuse."</blockquote>
+      <cite>— Louis Lee, Founder of Recycle 4 Life Global</cite>
+    </div>
+  </div>
+  <div class="mission-content">
+    <div class="label">Our Mission</div>
+    <h2>More Than Junk Removal. It's a Movement.</h2>
+    <p>Louis Lee founded Recycle 4 Life Global with a single conviction: every item discarded is an opportunity missed. Too much ends up in landfills that could be repurposed, donated, or recycled.</p>
+    <p>From Day 1, R4L has operated on the Triple-R philosophy — Repurpose, Recycle, Reuse — applied to every load we haul. When we pick up your items, we sort with intention. Wearable clothing goes to community partners. Functional furniture is donated. Everything else is recycled through certified processors.</p>
+    <p>We are not just a hauling company. We are a community resource that happens to own trucks.</p>
+    <div class="triple-r">
+      <div class="r-pill"><span>♻️</span> Repurpose First</div>
+      <div class="r-pill"><span>🌿</span> Recycle Always</div>
+      <div class="r-pill"><span>🤝</span> Reuse for Community</div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATION CTA -->
+<section id="donation">
+  <h2>Got Items That Could Help Someone?</h2>
+  <p>Before we haul it away, we assess everything for donation potential. Clothing, furniture, and household goods in usable condition go directly to community partners — free of charge.</p>
+  <a href="#contact" class="btn-white">Schedule a Donation Pickup →</a>
+</section>
+
+<!-- YOUTUBE -->
+<section id="watch">
+  <div class="section-header">
+    <div class="label" style="background:rgba(255,0,0,0.15); color:#FF6B6B;">Watch Us Work</div>
+    <h2>See the Triple-R Philosophy in Action</h2>
+    <p style="color:rgba(255,255,255,0.5);">Louis doesn't just talk about recycling — he does it every single day. Watch Episode 8 to see how we sort, repurpose, and reuse.</p>
+  </div>
+  <div class="yt-layout">
+    <div class="yt-embed-wrap">
+      <div class="yt-badge">▶ LIVE EPISODE</div>
+      <iframe
+        src="https://www.youtube.com/embed/o_H-4N9Q6W0"
+        title="Recycle 4 Life Global – Episode 8: Repurpose, Recycle, Reuse"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="yt-info">
+      <h3>Episode 8:<br/><em>Repurpose, Recycle, Reuse</em></h3>
+      <p>In this episode, Louis walks through a real haul — sorting textiles, repurposing materials, and showing exactly what happens to your items after pickup. This is the transparency most junk haulers never show you.</p>
+      <ul class="yt-highlights">
+        <li>See exactly how items are sorted on a real job</li>
+        <li>Watch usable clothing & goods get set aside for donation</li>
+        <li>Understand what "responsible disposal" actually looks like</li>
+        <li>Meet the team committed to daily recycling — not just on Earth Day</li>
+      </ul>
+      <a href="https://www.youtube.com/@recycle4lifeglobal" target="_blank" class="yt-sub-link">
+        ▶ Subscribe on YouTube
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SITEMAP REFERENCE -->
+<section id="sitemap" style="padding:64px 5%;">
+  <div class="section-header">
+    <div class="label">Site Architecture</div>
+    <h2>Site Map</h2>
+    <p>Five pages designed for a frictionless customer journey — from awareness to booking.</p>
+  </div>
+  <div class="sitemap-grid">
+    <div class="sitemap-col">
+      <h4>🏠 Home</h4>
+      <ul>
+        <li>Hero / Book Now CTA</li>
+        <li>Stats Bar</li>
+        <li>Services Overview</li>
+        <li>How It Works</li>
+        <li>Mission Quote</li>
+        <li>Trust Signals</li>
+      </ul>
+    </div>
+    <div class="sitemap-col">
+      <h4>🔧 Services</h4>
+      <ul>
+        <li>Tire Recycling</li>
+        <li>Junk Removal</li>
+        <li>Plastic Recycle</li>
+        <li>Recycle & Dispose</li>
+        <li>Donation Pickup</li>
+        <li>Commercial Plans</li>
+      </ul>
+    </div>
+    <div class="sitemap-col">
+      <h4>💰 Pricing</h4>
+      <ul>
+        <li>Item Price Grid</li>
+        <li>How We Quote</li>
+        <li>Price Guarantee</li>
+        <li>Get Custom Quote</li>
+        <li>FAQ</li>
+      </ul>
+    </div>
+    <div class="sitemap-col">
+      <h4>🌿 Our Mission</h4>
+      <ul>
+        <li>Louis's Story</li>
+        <li>Triple-R Philosophy</li>
+        <li>Community Impact</li>
+        <li>Partners</li>
+        <li>Video: Episode 8</li>
+      </ul>
+    </div>
+    <div class="sitemap-col">
+      <h4>📋 Book Now</h4>
+      <ul>
+        <li>Booking Form</li>
+        <li>Service Selector</li>
+        <li>Location Checker</li>
+        <li>Contact Info</li>
+        <li>Social Links</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="label">Book Now</div>
+      <h2>Ready to Clear the Clutter?</h2>
+      <p>Get a guaranteed quote in minutes. No waiting for someone to "come take a look." Fill out the form and we'll have a price to you within 30 minutes.</p>
+      <div class="contact-detail">
+        <div class="cd-icon">📍</div>
+        <div><strong>Service Area</strong><br/>Chicagoland & Surrounding Suburbs</div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">📞</div>
+        <div><strong>Phone</strong><br/>(312) 555-R4LG</div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">📧</div>
+        <div><strong>Email</strong><br/><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfb7bab3b3b09fadbabca6bcb3baebb3b6b9bab8b3b0bdbeb3f1bcb0b2">[email&#160;protected]</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">⏰</div>
+        <div><strong>Hours</strong><br/>Mon–Sat: 7am–7pm | Sun: 9am–5pm</div>
+      </div>
+    </div>
+    <div class="contact-form-card">
+      <div class="booking-title" style="margin-bottom:4px;">Get Your Free Estimate</div>
+      <p style="font-size:0.82rem; color:var(--gray); margin-bottom:24px;">Locked-in pricing. No surprises on arrival.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Louis"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Lee"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="(312) 555-0000"/>
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option>🛋️ Junk Removal</option>
+          <option>🚗 Tire Recycling</option>
+          <option>🧴 Plastic Recycling</option>
+          <option>♻️ Recycle & Dispose</option>
+          <option>🤝 Donation Pickup</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Zip Code</label>
+          <input type="text" placeholder="60601"/>
+        </div>
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tell Us About the Job</label>
+        <textarea placeholder="E.g. 2 couches, 1 fridge, and a pile of tires in my backyard..."></textarea>
+      </div>
+      <button class="btn-book" onclick="alert('Thanks! We\'ll send your guaranteed quote within 30 minutes. 🌿')">Send My Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="nav-logo" style="margin-bottom:0;">
+        <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M21 8.5l-1.5-3h-15L3 8.5M12 3v5.5M7.5 21l1-8h7l1 8M3 8.5h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/></svg></div>
+        <div class="nav-brand" style="color:white;">Recycle 4 Life<br/><span>Global</span></div>
+      </a>
+      <p>Repurpose. Recycle. Reuse. Chicago's on-demand eco-removal service built for the community, by the community.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Tire Recycling</a></li>
+        <li><a href="#services">Junk Removal</a></li>
+        <li><a href="#services">Plastic Recycle</a></li>
+        <li><a href="#services">Recycle & Dispose</a></li>
+        <li><a href="#donation">Donation Pickup</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#mission">Our Mission</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#sitemap">Site Map</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#contact">Book Now</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Recycle 4 Life Global. All rights reserved. Chicago, IL.</p>
+    <div class="eco-badge">🌿 70%+ Landfill Diversion Rate</div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c
