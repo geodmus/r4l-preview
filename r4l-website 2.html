@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Recycle 4 Life Global — On-Demand Junk Removal & Recycling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green:        #1DB954;
+  --green-dark:   #158a3e;
+  --green-dim:    rgba(29,185,84,0.12);
+  --bg:           #141414;
+  --bg2:          #1A1A1A;
+  --bg3:          #222222;
+  --border:       rgba(255,255,255,0.07);
+  --text:         #F0F0F0;
+  --muted:        #888888;
+  --white:        #FFFFFF;
+  --card-radius:  16px;
+  --transition:   0.22s ease;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+h1,h2,h3,h4,h5 { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.01em; line-height: 1.1; }
+a { text-decoration: none; color: inherit; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  height: 68px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; background: rgba(20,20,20,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { display: flex; align-items: center; gap: 11px; }
+.logo-mark { width: 36px; height: 36px; border-radius: 9px; background: var(--green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-mark svg { width: 20px; height: 20px; }
+.logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; line-height: 1.15; color: var(--white); }
+.logo-text span { color: var(--green); }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--muted); transition: color var(--transition); }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { background: var(--green); color: var(--bg) !important; padding: 9px 20px; border-radius: 8px; font-weight: 600 !important; font-size: 0.88rem !important; transition: background var(--transition), transform var(--transition); }
+.nav-cta:hover { background: var(--green-dark) !important; transform: translateY(-1px); }
+
+/* HERO */
+#home {
+  min-height: 100vh; display: grid; grid-template-columns: 1fr 420px;
+  gap: 48px; align-items: center; padding: 120px 5% 80px;
+  position: relative; overflow: hidden;
+}
+#home::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(29,185,84,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(29,185,84,0.04) 1px, transparent 1px);
+  background-size: 60px 60px; pointer-events: none;
+}
+#home::after {
+  content: ''; position: absolute; bottom: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(29,185,84,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(29,185,84,0.35); background: var(--green-dim);
+  color: var(--green); font-size: 0.73rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 50px; margin-bottom: 20px;
+}
+.hero-eyebrow-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.6)} }
+.hero-h1 { font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 800; color: var(--white); margin-bottom: 18px; }
+.hero-h1 .accent { color: var(--green); }
+.hero-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 480px; margin-bottom: 34px; font-weight: 300; }
+.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+.btn-green {
+  background: var(--green); color: var(--bg); padding: 13px 26px; border-radius: 9px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.03em;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 24px rgba(29,185,84,0.28);
+}
+.btn-green:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(29,185,84,0.38); }
+.btn-outline {
+  background: transparent; color: var(--text); padding: 13px 26px; border-radius: 9px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.03em;
+  border: 1.5px solid var(--border); transition: border-color var(--transition), background var(--transition);
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+.hero-badges { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.badge { display: flex; align-items: center; gap: 7px; font-size: 0.8rem; color: var(--muted); }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+/* booking card */
+.hero-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
+  padding: 30px 26px; position: relative; z-index: 2;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+.card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.card-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.svc-btn {
+  background: var(--bg3); border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 12px 10px; cursor: pointer; transition: all var(--transition);
+  font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--muted); text-align: center;
+}
+.svc-btn:hover { border-color: var(--green); color: var(--white); }
+.svc-btn.active { background: var(--green-dim); border-color: var(--green); color: var(--green); font-weight: 600; }
+.svc-icon { display: block; margin-bottom: 5px; }
+.svc-icon svg { width: 20px; height: 20px; margin: 0 auto; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.field {
+  width: 100%; padding: 11px 13px; background: var(--bg3); border: 1.5px solid var(--border); border-radius: 9px;
+  font-family: 'Outfit', sans-serif; font-size: 0.86rem; color: var(--text); outline: none; margin-bottom: 9px;
+  transition: border-color var(--transition);
+}
+.field:focus { border-color: var(--green); }
+.field::placeholder { color: var(--muted); }
+.btn-book {
+  width: 100%; padding: 13px; background: var(--green); color: var(--bg); border: none; border-radius: 9px;
+  cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em;
+  transition: background var(--transition), transform var(--transition); box-shadow: 0 4px 20px rgba(29,185,84,0.28);
+}
+.btn-book:hover { background: var(--green-dark); transform: translateY(-1px); }
+.card-note { font-size: 0.72rem; color: var(--muted); text-align: center; margin-top: 9px; }
+
+/* STATS */
+.stats {
+  background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4,1fr); padding: 0 5%;
+}
+.stat { padding: 26px 0; text-align: center; border-right: 1px solid var(--border); }
+.stat:last-child { border-right: none; }
+.stat-n { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 800; color: var(--green); }
+.stat-l { font-size: 0.75rem; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* SHARED */
+.section { padding: 88px 5%; }
+.section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+.section-h { font-size: clamp(1.9rem, 3vw, 2.8rem); font-weight: 800; color: var(--white); margin-bottom: 12px; }
+.section-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.75; max-width: 480px; font-weight: 300; }
+.section-header { margin-bottom: 52px; }
+.section-header.centered { text-align: center; }
+.section-header.centered .section-sub { margin: 0 auto; }
+
+/* SERVICES */
+#services { background: var(--bg2); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 18px; }
+.service-card {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 30px 24px;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.service-card:hover { transform: translateY(-4px); border-color: rgba(29,185,84,0.3); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+.svc-card-icon {
+  width: 50px; height: 50px; border-radius: 12px; background: var(--green-dim);
+  border: 1px solid rgba(29,185,84,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.svc-card-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 1.7; }
+.service-card h3 { font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 9px; }
+.service-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; font-weight: 300; }
+.svc-tag { font-size: 0.72rem; font-weight: 600; color: var(--green); letter-spacing: 0.07em; text-transform: uppercase; }
+
+/* HOW IT WORKS */
+#how { background: var(--bg); }
+.steps { display: grid; grid-template-columns: repeat(5,1fr); }
+.step { padding: 32px 24px; border-right: 1px solid var(--border); transition: background var(--transition); }
+.step:last-child { border-right: none; }
+.step:hover { background: var(--bg2); }
+.step-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.2rem; font-weight: 800; color: rgba(29,185,84,0.14); line-height: 1; margin-bottom: 14px; }
+.step h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.step p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* PRICING */
+#pricing { background: var(--bg2); }
+.price-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px,1fr)); gap: 10px; margin-bottom: 32px; }
+.price-card {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 11px;
+  padding: 18px 14px; text-align: center;
+  transition: border-color var(--transition), transform var(--transition); cursor: pointer;
+}
+.price-card:hover { border-color: rgba(29,185,84,0.4); transform: translateY(-3px); }
+.pc-icon { margin-bottom: 9px; }
+.pc-icon svg { width: 26px; height: 26px; stroke: var(--green); fill: none; stroke-width: 1.6; margin: 0 auto; }
+.pc-name { font-size: 0.78rem; color: var(--muted); margin-bottom: 5px; }
+.pc-price { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--white); }
+.price-guarantee {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--green-dim); border: 1px solid rgba(29,185,84,0.25); border-radius: 11px;
+  padding: 15px 22px; font-size: 0.86rem; color: var(--green); font-weight: 500; margin-bottom: 28px;
+}
+.price-guarantee svg { width: 17px; height: 17px; stroke: var(--green); fill: none; stroke-width: 2; flex-shrink: 0; }
+.pricing-cta { text-align: center; }
+
+/* MISSION */
+#mission {
+  background: var(--bg); display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center; padding: 88px 5%;
+}
+.mission-visual {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
+  padding: 44px 36px; position: relative; overflow: hidden;
+  min-height: 360px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.mission-visual::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--green), transparent);
+}
+.mission-pattern {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle, rgba(29,185,84,0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.mission-quote-text {
+  font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 700; color: var(--white); line-height: 1.35; margin-bottom: 14px; position: relative; z-index: 1;
+}
+.mission-quote-text .hl { color: var(--green); }
+.mission-cite { font-size: 0.8rem; color: var(--muted); position: relative; z-index: 1; }
+.mission-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 13px; font-weight: 300; }
+.triple { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+.triple-pill {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 50px;
+  padding: 7px 16px; font-size: 0.8rem; font-weight: 500; color: var(--text);
+  display: flex; align-items: center; gap: 6px;
+}
+.triple-pill span { color: var(--green); font-weight: 700; }
+
+/* YOUTUBE */
+#watch { background: var(--bg2); padding: 88px 5%; }
+.yt-wrap { display: grid; grid-template-columns: 1.3fr 1fr; gap: 52px; align-items: center; }
+.yt-frame { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 24px 64px rgba(0,0,0,0.5); border: 1px solid var(--border); }
+.yt-frame iframe { width: 100%; height: 100%; display: block; border: none; }
+.yt-info h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); font-weight: 700; color: var(--white); margin-bottom: 12px; }
+.yt-info h3 span { color: var(--green); }
+.yt-info p { font-size: 0.86rem; color: var(--muted); line-height: 1.75; margin-bottom: 22px; font-weight: 300; }
+.yt-points { list-style: none; margin-bottom: 26px; }
+.yt-points li { font-size: 0.83rem; color: var(--muted); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 9px; font-weight: 300; }
+.yt-points li:last-child { border-bottom: none; }
+.yt-points li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.yt-sub {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #FF0000; color: white; padding: 10px 18px; border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.03em;
+  transition: background var(--transition), transform var(--transition);
+}
+.yt-sub:hover { background: #CC0000; transform: translateY(-2px); }
+
+/* DONATION */
+#donation { background: linear-gradient(135deg, #0f5c2e, #1a7a40); padding: 72px 5%; text-align: center; }
+#donation h2 { font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 800; color: var(--white); margin-bottom: 12px; }
+#donation p { font-size: 0.92rem; color: rgba(255,255,255,0.72); max-width: 480px; margin: 0 auto 26px; line-height: 1.7; font-weight: 300; }
+.btn-white { background: white; color: #0f5c2e; padding: 12px 26px; border-radius: 9px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.03em; display: inline-block; transition: transform var(--transition), box-shadow var(--transition); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+/* CONTACT */
+#contact { background: var(--bg); }
+.contact-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
+.contact-info p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 28px; font-weight: 300; }
+.c-detail { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+.c-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--green-dim); border: 1px solid rgba(29,185,84,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.c-icon svg { width: 15px; height: 15px; stroke: var(--green); fill: none; stroke-width: 2; }
+.c-text strong { display: block; font-size: 0.8rem; font-weight: 600; color: var(--white); margin-bottom: 1px; }
+.c-text span { font-size: 0.8rem; color: var(--muted); }
+.contact-form { background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 32px 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.form-group { margin-bottom: 13px; }
+label { display: block; font-size: 0.74rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.07em; }
+input, select, textarea {
+  width: 100%; padding: 10px 13px; background: var(--bg3); border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: 'Outfit', sans-serif; font-size: 0.86rem; color: var(--text); outline: none;
+  transition: border-color var(--transition);
+}
+input:focus, select:focus, textarea:focus { border-color: var(--green); }
+input::placeholder, textarea::placeholder { color: var(--muted); }
+select option { background: var(--bg3); }
+textarea { min-height: 88px; resize: vertical; }
+
+/* FOOTER */
+footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 56px 5% 26px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 44px; }
+.footer-about p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; margin-top: 13px; max-width: 250px; font-weight: 300; }
+.footer-col h4 { font-size: 0.72rem; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 8px; }
+.footer-col a { font-size: 0.81rem; color: var(--muted); transition: color var(--transition); }
+.footer-col a:hover { color: var(--green); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.footer-bottom p { font-size: 0.76rem; color: var(--muted); }
+.eco-chip { background: var(--green-dim); border: 1px solid rgba(29,185,84,0.22); color: var(--green); font-size: 0.71rem; font-weight: 600; padding: 4px 11px; border-radius: 20px; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.hero-left > * { animation: fadeUp 0.6s ease both; }
+.hero-left > *:nth-child(1){animation-delay:0.05s}
+.hero-left > *:nth-child(2){animation-delay:0.15s}
+.hero-left > *:nth-child(3){animation-delay:0.25s}
+.hero-left > *:nth-child(4){animation-delay:0.35s}
+.hero-left > *:nth-child(5){animation-delay:0.42s}
+.hero-card { animation: fadeUp 0.7s 0.2s ease both; }
+
+/* RESPONSIVE */
+@media(max-width: 960px) {
+  #home { grid-template-columns: 1fr; padding-top: 100px; }
+  #mission { grid-template-columns: 1fr; }
+  .yt-wrap { grid-template-columns: 1fr; }
+  .contact-wrap { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: repeat(2,1fr); }
+  .stat:nth-child(2) { border-right: none; }
+  .steps { grid-template-columns: repeat(3,1fr); }
+}
+@media(max-width: 640px) {
+  nav { padding: 0 4%; }
+  .nav-links { display: none; }
+  .section { padding: 60px 4%; }
+  #mission, #watch, #contact { padding: 60px 4%; }
+  .stats { padding: 0 4%; }
+  .hero-h1 { font-size: 2.6rem; }
+  .steps { grid-template-columns: 1fr; }
+  .step { border-right: none; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .price-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  #how { padding-left: 0; padding-right: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5M12 7v5l3 3"/>
+      </svg>
+    </div>
+    <div class="logo-text">Recycle 4 Life<br/><span>Global</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#watch">Watch</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <a href="#contact" class="btn-green" style="display:none;" id="mob-cta">Get a Quote</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div>Chicago's On-Demand Eco-Removal</div>
+    <h1 class="hero-h1">Junk Removal<br/>Made <span class="accent">Simple.</span></h1>
+    <p class="hero-sub">Upfront pricing. Same-day service. We repurpose, recycle, and responsibly dispose — so nothing goes to waste.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-green">Get Your Price</a>
+      <a href="#how" class="btn-outline">How It Works</a>
+    </div>
+    <div class="hero-badges">
+      <div class="badge"><div class="badge-dot"></div>Transparent Pricing</div>
+      <div class="badge"><div class="badge-dot"></div>Same-Day Available</div>
+      <div class="badge"><div class="badge-dot"></div>Zero Hidden Fees</div>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="card-title">Get Your Price</div>
+    <div class="card-sub">Select a service — no credit card needed</div>
+    <div class="svc-grid">
+      <button class="svc-btn active" onclick="selectSvc(this)">
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9h18M3 9v9a2 2 0 002 2h14a2 2 0 002-2V9M9 14h6"/></svg></span>
+        Junk Removal
+      </button>
+      <button class="svc-btn" onclick="selectSvc(this)">
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></span>
+        Tire Recycling
+      </button>
+      <button class="svc-btn" onclick="selectSvc(this)">
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></span>
+        Plastic Recycle
+      </button>
+      <button class="svc-btn" onclick="selectSvc(this)">
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span>
+        Recycle &amp; Dispose
+      </button>
+    </div>
+    <input class="field" type="text" placeholder="Enter your zip code"/>
+    <input class="field" type="text" placeholder="Preferred date (optional)"/>
+    <button class="btn-book" onclick="alert('We will send your guaranteed quote within 30 minutes.')">Get My Free Estimate</button>
+    <p class="card-note">Guaranteed price. No on-site surprises.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n">5,000+</div><div class="stat-l">Tons Diverted</div></div>
+  <div class="stat"><div class="stat-n">98%</div><div class="stat-l">Satisfaction Rate</div></div>
+  <div class="stat"><div class="stat-n">Same Day</div><div class="stat-l">Service Available</div></div>
+  <div class="stat"><div class="stat-n">$0</div><div class="stat-l">Hidden Fees</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="section-header centered">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-h">Four Pillars of Responsible Removal</h2>
+    <p class="section-sub">Every item we pick up gets a second chance before it ever sees a landfill.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+      <h3>Tire Recycling</h3>
+      <p>Responsible disposal and repurposing of bulk tires. Every tire is shredded, retreaded, or processed — never dumped illegally.</p>
+      <div class="svc-tag">Bulk Accepted</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-card-icon"><svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9h18M3 9v9a2 2 0 002 2h14a2 2 0 002-2V9M9 14h6"/></svg></div>
+      <h3>Junk Removal</h3>
+      <p>Full-service hauling for homes and businesses. We do the heavy lifting, sort everything, and leave your space spotless.</p>
+      <div class="svc-tag">Residential + Commercial</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-card-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+      <h3>Plastic Recycle</h3>
+      <p>Commercial and residential plastic waste routed to the right processing facilities — far beyond what curbside can handle.</p>
+      <div class="svc-tag">Sorted &amp; Certified</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-card-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M12 7v5l3 3"/></svg></div>
+      <h3>Recycle &amp; Dispose</h3>
+      <p>General eco-friendly waste management for mixed loads, estate cleanouts, and construction debris — handled with full accountability.</p>
+      <div class="svc-tag">Mixed Loads OK</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="section" style="padding-left:0;padding-right:0;padding-bottom:0;">
+  <div style="padding:0 5%;margin-bottom:44px;">
+    <div class="section-label">Process</div>
+    <h2 class="section-h">Booked in 60 Seconds</h2>
+    <p class="section-sub">No waiting on estimates. No surprise bills on arrival.</p>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h3>Choose Service</h3><p>Pick what you need removed from our clear service menu.</p></div>
+    <div class="step"><div class="step-num">02</div><h3>Get Upfront Price</h3><p>Guaranteed pricing instantly. No on-site estimate required.</p></div>
+    <div class="step"><div class="step-num">03</div><h3>Pick Your Time</h3><p>Same-day and next-day slots across Chicagoland.</p></div>
+    <div class="step"><div class="step-num">04</div><h3>We Arrive &amp; Haul</h3><p>On time, heavy lifting done, space left spotless.</p></div>
+    <div class="step"><div class="step-num">05</div><h3>Repurpose First</h3><p>Usable items to community partners. Landfill is last resort.</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <div class="section-header centered">
+    <div class="section-label">Transparent Pricing</div>
+    <h2 class="section-h">Know the Cost Before We Arrive</h2>
+    <p class="section-sub">Guaranteed upfront pricing. No on-site adjustments. Ever.</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9h18M3 9v9a2 2 0 002 2h14a2 2 0 002-2V9"/></svg></div><div class="pc-name">Sofa / Couch</div><div class="pc-price">From $89</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="pc-name">Mattress</div><div class="pc-price">From $69</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="5" y1="10" x2="19" y2="10"/></svg></div><div class="pc-name">Refrigerator</div><div class="pc-price">From $99</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="pc-name">TV / Electronics</div><div class="pc-price">From $49</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div><div class="pc-name">Single Tire</div><div class="pc-price">From $15</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div><div class="pc-name">Tire Pile (10+)</div><div class="pc-price">From $99</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="pc-name">Room Cleanout</div><div class="pc-price">From $199</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="pc-name">Full Home</div><div class="pc-price">From $499</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18"/></svg></div><div class="pc-name">Plastic Bulk</div><div class="pc-price">From $59</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="pc-name">Office Furniture</div><div class="pc-price">From $79</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zM2 12h20"/></svg></div><div class="pc-name">Yard Waste</div><div class="pc-price">From $79</div></div>
+    <div class="price-card"><div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="pc-name">Mixed Load</div><div class="pc-price">From $149</div></div>
+  </div>
+  <div class="price-guarantee">
+    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Price Guarantee — We quote it. We honor it. No on-site adjustments.
+  </div>
+  <div class="pricing-cta"><a href="#contact" class="btn-green">Get My Custom Quote</a></div>
+</section>
+
+<!-- MISSION -->
+<section id="mission">
+  <div class="mission-visual">
+    <div class="mission-pattern"></div>
+    <div class="mission-quote-text">"We don't just dump —<br/>we <span class="hl">Repurpose, Recycle,</span><br/>and Reuse."</div>
+    <div class="mission-cite">— Louis Lee, Founder of Recycle 4 Life Global</div>
+  </div>
+  <div class="mission-content">
+    <div class="section-label">Our Mission</div>
+    <h2 class="section-h">More Than Removal.<br/>It's a Movement.</h2>
+    <p>Louis Lee founded R4L with one conviction: every discarded item is an opportunity. Too much ends up in landfills that could be repurposed, donated, or recycled.</p>
+    <p>We sort with intention on every job. Clothing goes to community partners. Functional furniture is donated. Everything else goes through certified processors.</p>
+    <div class="triple">
+      <div class="triple-pill"><span>01</span> Repurpose First</div>
+      <div class="triple-pill"><span>02</span> Recycle Always</div>
+      <div class="triple-pill"><span>03</span> Reuse for Community</div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE -->
+<section id="watch">
+  <div class="section-header" style="margin-bottom:44px;">
+    <div class="section-label">Watch Us Work</div>
+    <h2 class="section-h">See It in Action</h2>
+    <p class="section-sub">Louis takes you on a real job — sorting, repurposing, and recycling live. The transparency other haulers never show.</p>
+  </div>
+  <div class="yt-wrap">
+    <div class="yt-frame">
+      <iframe src="https://www.youtube.com/embed/o_H-4N9Q6W0" title="Recycle 4 Life Global — Episode 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="yt-info">
+      <h3>Episode 1:<br/><span>Recycle 4 Life Global</span></h3>
+      <p>Watch Louis walk through a real haul — see how items are sorted, what gets donated, and what responsible disposal looks like every single day.</p>
+      <ul class="yt-points">
+        <li>Live sorting process on a real job</li>
+        <li>Clothing and goods set aside for donation</li>
+        <li>What responsible disposal actually looks like</li>
+        <li>A team committed to recycling daily</li>
+      </ul>
+      <a href="https://www.youtube.com/@recycle4lifeglobal" target="_blank" class="yt-sub">Subscribe on YouTube</a>
+    </div>
+  </div>
+</section>
+
+<!-- DONATION -->
+<section id="donation">
+  <h2>Got Items That Could Help Someone?</h2>
+  <p>Before we haul it away, we assess everything for donation potential. Usable items go directly to community partners at no extra charge.</p>
+  <a href="#contact" class="btn-white">Schedule a Donation Pickup</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <div class="section-label">Book Now</div>
+      <h2 class="section-h">Ready to Clear<br/>the Clutter?</h2>
+      <p>Fill out the form and we'll send a guaranteed quote within 30 minutes. No waiting. No surprises.</p>
+      <div class="c-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="c-text"><strong>Service Area</strong><span>Chicagoland &amp; Surrounding Suburbs</span></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div class="c-text"><strong>Phone</strong><span>(312) 555-R4LG</span></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="c-text"><strong>Email</strong><span>hello@recycle4lifeglobal.com</span></div>
+      </div>
+      <div class="c-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="c-text"><strong>Hours</strong><span>Mon–Sat 7am–7pm &nbsp;|&nbsp; Sun 9am–5pm</span></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="card-title" style="margin-bottom:4px;">Get Your Free Estimate</div>
+      <p style="font-size:0.8rem;color:var(--muted);margin-bottom:22px;">Guaranteed pricing. No surprises on arrival.</p>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Louis"/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Lee"/></div>
+      </div>
+      <div class="form-group"><label>Phone</label><input type="tel" placeholder="(312) 555-0000"/></div>
+      <div class="form-group">
+        <label>Service</label>
+        <select>
+          <option>Junk Removal</option>
+          <option>Tire Recycling</option>
+          <option>Plastic Recycling</option>
+          <option>Recycle &amp; Dispose</option>
+          <option>Donation Pickup</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Zip Code</label><input type="text" placeholder="60601"/></div>
+        <div class="form-group"><label>Preferred Date</label><input type="date"/></div>
+      </div>
+      <div class="form-group"><label>Job Details</label><textarea placeholder="E.g. 2 couches, 1 fridge, pile of tires in the backyard..."></textarea></div>
+      <button class="btn-book" onclick="alert('Thanks! Your guaranteed quote is on the way within 30 minutes.')">Send My Request</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-about">
+      <a href="#home" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M12 7v5l3 3"/></svg></div>
+        <div class="logo-text">Recycle 4 Life<br/><span>Global</span></div>
+      </a>
+      <p>Repurpose. Recycle. Reuse. Chicago's on-demand eco-removal built for the community.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Tire Recycling</a></li>
+        <li><a href="#services">Junk Removal</a></li>
+        <li><a href="#services">Plastic Recycle</a></li>
+        <li><a href="#services">Recycle &amp; Dispose</a></li>
+        <li><a href="#donation">Donation Pickup</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#mission">Our Mission</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#watch">Watch</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.youtube.com/@recycle4lifeglobal" target="_blank">YouTube</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#contact">Book Now</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Recycle 4 Life Global. Chicago, IL.</p>
+    <div class="eco-chip">70%+ Landfill Diversion Rate</div>
+  </div>
+</footer>
+
+<script>
+function selectSvc(el) {
+  document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+// show mobile CTA when nav links hidden
+if(window.innerWidth <= 640) {
+  document.getElementById('mob-cta').style.display = 'flex';
+}
+</script>
+</body>
+</html>
